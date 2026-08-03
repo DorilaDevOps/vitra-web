@@ -453,17 +453,23 @@
 			padding:.5rem;
 		}
 		
+        /* Secciones ocultas por defecto (navegación por vistas) */
+        .view-hidden {
+            display: none !important;
+        }
+
         .hero {
-            margin:1rem 0 1rem 0;
-            min-height: calc(100vh - 20px);
+            margin: -1rem -0.5rem 0;
+            min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             background: linear-gradient(180deg, var(--deg2) 0%, var(--white_transp1) 36%);
-            overflow: hidden;    
-			border-radius: 0 0 10px 10px;
-			border-bottom: 1px solid white;
+            overflow: hidden;
+            border-bottom: 1px solid white;
+            padding-top: 70px;
         }
 
         .hero::before {
@@ -483,11 +489,11 @@
         }
 
         .hero-content {
+            width: 100%;
             max-width: 1300px;
             text-align: center;
-            position: absolute;
+            position: static;
             animation: fadeInUp 1s ease;
-			min-height: 100vh;
         }
 
         @keyframes fadeInUp {
@@ -503,7 +509,7 @@
 
         .hero-content  h1 {
 			color: white;
-			font-size: 3.5em;
+			font-size: clamp(4.5rem, 15vw, 7rem);
 			-webkit-text-stroke-width: 0.5px;
 			-webkit-text-stroke-color: black;
 			text-transform: uppercase;
@@ -512,7 +518,7 @@
             font-weight: 300;
             
 			transition:var(--transition1s);
-			animation:creceLetter 2s ease-in-out infinite alternate;
+			animation:creceLetterMobile 2s ease-in-out infinite alternate;
 		}
 		
 		 @keyframes creceLetter {
@@ -526,6 +532,19 @@
 				opacity: 1;
 				-webkit-text-stroke-width: 0.1px;
 			 } 
+        }
+
+        @keyframes creceLetterMobile {
+            0% {
+                opacity: .2;
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-20px);
+                letter-spacing: 0.6rem;
+                opacity: 1;
+                -webkit-text-stroke-width: 0.1px;
+            }
         }
 		
 
@@ -1519,8 +1538,19 @@
                 display: none;
             }
 
+        .hero {
+                margin: 1rem 0;
+                min-height: calc(100vh - 20px);
+                border-radius: 0 0 10px 10px;
+                padding-top: 0;
+            }
+
+            .hero-content h1 {
+                animation: creceLetter 2s ease-in-out infinite alternate;
+            }
+
             .hero h1 {
-                font-size: 3.5rem;
+                font-size: 5rem;
             }
 			.btn {
 				padding: 1rem 2rem; 
@@ -1549,7 +1579,7 @@
 		
 		html{font-size:140%;}
             .hero h1 {
-                font-size: 4rem;
+                font-size: 5rem;
             }
 
             .features-grid {
@@ -2518,16 +2548,43 @@
 			
         });
 
-        // Smooth scroll for all anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+        // Navegación por vistas (página única en el mismo index.html)
+        const SECTION_IDS = ['#inicio', '#nosotros', '#productos', '#proceso', '#sustentabilidad', '#testimonios', '#contacto'];
+        const DEFAULT_VIEW = ['#inicio', '#productos', '#contacto'];
+
+        function showView(href) {
+            const visible = href === '#inicio' ? DEFAULT_VIEW : [href];
+            SECTION_IDS.forEach((id) => {
+                const el = document.querySelector(id);
+                if (!el) return;
+                el.classList.toggle('view-hidden', !visible.includes(id));
+            });
+        }
+
+        showView('#inicio');
+
+        document.addEventListener('click', (e) => {
+            const anchor = e.target.closest('a[href^="#"]');
+            if (!anchor) return;
+            if (anchor.classList.contains('skip-link')) {
+                showView('#inicio');
+                return;
+            }
+            e.preventDefault();
+            const href = anchor.getAttribute('href');
+            if (!href || href === '#') return;
+            showView(href);
+            requestAnimationFrame(() => {
+                if (href === '#inicio') {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
