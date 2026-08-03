@@ -7,8 +7,9 @@
 // PASOS:
 //  1) Crear una hoja de cálculo de Google (vacía) y abrir Apps Script.
 //  2) Pegar este código completo en el editor.
-//  3) Elegir la función "setPassword" en el selector y ejecutarla
-//     (autoriza permisos cuando lo pida). Escribís tu contraseña.
+//  3) Elegir la función "setTestCredentials" en el selector y ejecutarla
+//     (crea el usuario de prueba: vitra / 123). Para cambiar después,
+//     usá "setPassword" (autoriza permisos cuando lo pida).
 //  4) Ejecutar "seedProducts" para cargar el catálogo actual.
 //  5) Deploy > New deployment > Web app:
 //       - Execute as: Me
@@ -21,6 +22,7 @@
 
 var SHEET_NAME = 'Productos';
 var HEADERS = ['id', 'title', 'subTitle', 'description', 'precio', 'tarjeta', 'category', 'src'];
+var USER_KEY = 'ADMIN_USER';
 var PASSWORD_KEY = 'ADMIN_PASSWORD';
 var IMAGES_FOLDER = 'Vitra Imágenes';
 
@@ -49,10 +51,11 @@ function doPost(e) {
       body = JSON.parse(e.postData.contents || '{}');
     }
     var action = body.action || (e && e.parameter && e.parameter.action) || '';
+    var username = String(body.username || '').trim();
     var password = body.password || '';
 
-    if (!checkPassword(password)) {
-      return jsonResponse({ error: 'Contraseña incorrecta.' });
+    if (!checkPassword(username, password)) {
+      return jsonResponse({ error: 'Usuario o contraseña incorrectos.' });
     }
 
     if (action === 'check') {
@@ -71,9 +74,9 @@ function doPost(e) {
 }
 
 // ---------------------------------------------------------------------
-// Contraseña y protección contra fuerza bruta (5 intentos / 5 minutos)
+// Login: usuario + contraseña contra las propiedades guardadas
 // ---------------------------------------------------------------------
-function checkPassword(password) {
+function checkPassword(username, password) {
   var props = PropertiesService.getScriptProperties();
   var now = Date.now();
   var failCount = Number(props.getProperty('FAIL_COUNT') || 0);
@@ -83,7 +86,10 @@ function checkPassword(password) {
     throw new Error('Demasiados intentos. Esperá unos minutos e intentá de nuevo.');
   }
 
-  if (password && password === props.getProperty(PASSWORD_KEY)) {
+  var storedUser = String(props.getProperty(USER_KEY) || '');
+  var storedPass = String(props.getProperty(PASSWORD_KEY) || '');
+
+  if (username && username === storedUser && password && password === storedPass) {
     props.deleteProperty('FAIL_COUNT');
     props.deleteProperty('LAST_FAIL');
     return true;
@@ -95,24 +101,48 @@ function checkPassword(password) {
 }
 
 // ---------------------------------------------------------------------
-// Setup: definir la contraseña del panel
+// Setup: usuario y contraseña de prueba (vitra / 123)
+// ---------------------------------------------------------------------
+function setTestCredentials() {
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty(USER_KEY, 'vitra');
+  props.setProperty(PASSWORD_KEY, '123');
+  return 'Credenciales de prueba listas: usuario "vitra" / contraseña "123".';
+}
+
+// ---------------------------------------------------------------------
+// Setup: definir usuario y contraseña del panel
 // ---------------------------------------------------------------------
 function setPassword() {
   var ui = SpreadsheetApp.getUi();
-  var res = ui.prompt(
-    'Nueva contraseña de administrador',
-    'Escribí la contraseña que usarás para entrar al panel (mínimo 6 caracteres):',
+  var resUser = ui.prompt(
+    'Usuario de administrador',
+    'Escribí el nombre de usuario para entrar al panel:',
     ui.ButtonSet.OK_CANCEL
   );
-  if (res.getSelectedButton() !== ui.Button.OK) return;
-
-  var pass = res.getResponseText();
-  if (pass.length < 6) {
-    ui.alert('La contraseña debe tener al menos 6 caracteres.');
+  if (resUser.getSelectedButton() !== ui.Button.OK) return;
+  var user = resUser.getResponseText().trim();
+  if (!user) {
+    ui.alert('El usuario no puede estar vacío.');
     return;
   }
-  PropertiesService.getScriptProperties().setProperty(PASSWORD_KEY, pass);
-  ui.alert('Contraseña guardada.');
+
+  var resPass = ui.prompt(
+    'Nueva contraseña de administrador',
+    'Escribí la contraseña que usarás para entrar al panel:',
+    ui.ButtonSet.OK_CANCEL
+  );
+  if (resPass.getSelectedButton() !== ui.Button.OK) return;
+  var pass = resPass.getResponseText();
+  if (!pass) {
+    ui.alert('La contraseña no puede estar vacía.');
+    return;
+  }
+
+  var props = PropertiesService.getScriptProperties();
+  props.setProperty(USER_KEY, user);
+  props.setProperty(PASSWORD_KEY, pass);
+  ui.alert('Usuario y contraseña guardados.');
 }
 
 // ---------------------------------------------------------------------

@@ -315,6 +315,10 @@
             <p>Solo para administradores del sitio.</p>
             <form id="loginForm" novalidate>
                 <div class="field">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" autocomplete="username" required>
+                </div>
+                <div class="field">
                     <label for="password">Contraseña</label>
                     <input type="password" id="password" name="password" autocomplete="current-password" required>
                 </div>
@@ -380,6 +384,7 @@
         const panelView = $('#panelView');
         const logoutBtn = $('#logoutBtn');
         const loginForm = $('#loginForm');
+        const usernameInput = $('#username');
         const passwordInput = $('#password');
         const loginBtn = $('#loginBtn');
         const loginError = $('#loginError');
@@ -397,6 +402,7 @@
 
         const state = {
             loggedIn: false,
+            username: sessionStorage.getItem('vitra_admin_user') || '',
             password: sessionStorage.getItem('vitra_admin_pw') || ''
         };
 
@@ -419,7 +425,7 @@
             }
             const url = new URL(APP_SCRIPT_URL);
             url.searchParams.set('action', action);
-            const body = Object.assign({ action }, payload, { password: state.password });
+            const body = Object.assign({ action }, payload, { username: state.username, password: state.password });
             const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body) });
             const data = await res.json().catch(() => null);
             if (!data || data.error) {
@@ -437,20 +443,26 @@
         // ------------------- Login -------------------
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const user = usernameInput.value.trim();
             const pass = passwordInput.value.trim();
-            if (!pass) return;
+            if (!user || !pass) return;
             setStatus(null, loginError, '', '');
             loginBtn.disabled = true;
+            state.username = user;
             state.password = pass;
             try {
                 await api('check');
                 state.loggedIn = true;
+                sessionStorage.setItem('vitra_admin_user', user);
                 sessionStorage.setItem('vitra_admin_pw', pass);
+                usernameInput.value = '';
                 passwordInput.value = '';
                 showView();
                 loadProducts();
             } catch (err) {
+                state.username = '';
                 state.password = '';
+                sessionStorage.removeItem('vitra_admin_user');
                 sessionStorage.removeItem('vitra_admin_pw');
                 setStatus(null, loginError, err.message, 'error');
             } finally {
@@ -460,7 +472,9 @@
 
         logoutBtn.addEventListener('click', () => {
             state.loggedIn = false;
+            state.username = '';
             state.password = '';
+            sessionStorage.removeItem('vitra_admin_user');
             sessionStorage.removeItem('vitra_admin_pw');
             showView();
         });
@@ -617,7 +631,7 @@
         // ------------------- Init -------------------
         (async function init() {
             showView();
-            if (!state.password) return;
+            if (!state.username || !state.password) return;
             try {
                 await api('check');
                 state.loggedIn = true;
@@ -625,7 +639,9 @@
                 loadProducts();
             } catch (err) {
                 state.loggedIn = false;
+                state.username = '';
                 state.password = '';
+                sessionStorage.removeItem('vitra_admin_user');
                 sessionStorage.removeItem('vitra_admin_pw');
                 showView();
             }
