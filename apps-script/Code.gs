@@ -2,7 +2,8 @@
 // VITRA - Backend con Google Apps Script
 // ---------------------------------------------------------------------
 // Este script se pega en: Extensions > Apps Script (dentro de la hoja
-// de cálculo de Google). Luego se publica como "Web app".
+// de cálculo de Google) o como proyecto independiente en script.google.com.
+// Luego se publica como "Web app".
 //
 // PASOS:
 //  1) Crear una hoja de cálculo de Google (vacía) y abrir Apps Script.
@@ -10,7 +11,8 @@
 //  3) Elegir la función "setTestCredentials" en el selector y ejecutarla
 //     (crea el usuario de prueba: vitra / 123). Para cambiar después,
 //     usá "setPassword" (autoriza permisos cuando lo pida).
-//  4) Ejecutar "seedProducts" para cargar el catálogo actual.
+//  4) Ejecutar "seedProducts" para cargar el catálogo actual
+//     (crea la hoja "Vitra Catálogo" automáticamente si falta).
 //  5) Deploy > New deployment > Web app:
 //       - Execute as: Me
 //       - Who has access: Anyone
@@ -24,6 +26,7 @@ var SHEET_NAME = 'Productos';
 var HEADERS = ['id', 'title', 'subTitle', 'description', 'precio', 'tarjeta', 'category', 'src'];
 var USER_KEY = 'ADMIN_USER';
 var PASSWORD_KEY = 'ADMIN_PASSWORD';
+var SPREADSHEET_ID_KEY = 'SPREADSHEET_ID';
 var IMAGES_FOLDER = 'Vitra Imágenes';
 
 // ---------------------------------------------------------------------
@@ -183,12 +186,28 @@ function seedProducts() {
 }
 
 // ---------------------------------------------------------------------
-// Acceso a la hoja
+// Acceso a la hoja (funciona en proyecto independiente o dentro de la hoja)
 // ---------------------------------------------------------------------
+function getSpreadsheet() {
+  var props = PropertiesService.getScriptProperties();
+  var id = props.getProperty(SPREADSHEET_ID_KEY);
+  if (id) {
+    try {
+      return SpreadsheetApp.openById(id);
+    } catch (e) {
+      // la hoja ya no existe; creamos una nueva
+    }
+  }
+  var ss = SpreadsheetApp.create('Vitra Catálogo');
+  props.setProperty(SPREADSHEET_ID_KEY, ss.getId());
+  return ss;
+}
+
 function getSheet() {
-  var sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAME);
+  var ss = getSpreadsheet();
+  var sheet = ss.getSheetByName(SHEET_NAME);
   if (!sheet) {
-    sheet = SpreadsheetApp.getActive().insertSheet(SHEET_NAME);
+    sheet = ss.insertSheet(SHEET_NAME);
     sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
   }
