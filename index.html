@@ -45,7 +45,7 @@
     <link rel="shortcut icon" type="image/png" href="logo_icons/viTRA ICO 16.png">
     <link rel="apple-touch-icon" href="logo_icons/viTRA ICO 16.png">
 	
-	<link href="https://fonts.googleapis.com/css2?family=Comfortaa&family=Playfair+Display:ital,wght@0,500;1,500&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;1,500&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -123,7 +123,6 @@
             --bg-secondary: #f8f9fa;
             --white_transp1: #e7e6e69e;
             --white_transp2: #9788889e;
-			--mercedes_color: #048858;
             --blue_transp2: rgb(57 100 123 / 97%);
             --text-primary: #1a1a1a;
             --text-secondary: #6c757d;
@@ -165,8 +164,6 @@
 			--deg3: #181818;
 			--deg4: #050505;
 						
-			--mercedes_color: #2bffb3;
-			
 			.sun-icon {display: none;}
 			.moon-icon {display: block;}
         }
@@ -262,7 +259,7 @@
             top: 0;
             left: 0;
             background: var(--white_transp1);
-            backdrop-filter: blur(50px);
+            
             z-index: 10;
             box-shadow: 0 2px 20px var(--shadow);
             transition: var(--transition1s);
@@ -277,7 +274,7 @@
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1rem 1.5rem;
+            padding: .3rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -450,7 +447,7 @@
 
 
         main, aside{
-			padding:.5rem;
+			padding: 0;
 		}
 		
         /* Secciones ocultas por defecto (navegación por vistas) */
@@ -469,7 +466,6 @@
             background: linear-gradient(180deg, var(--deg2) 0%, var(--white_transp1) 36%);
             overflow: hidden;
             border-bottom: 1px solid white;
-            padding-top: 70px;
         }
 
         .hero::before {
@@ -622,7 +618,8 @@
             background: transparent;
             color: var(--text-primary);
             border: 2px solid var(--secondary_trans);
-            display: inline-block;
+            display: flex;
+            justify-content: center;
             padding: 0.5rem 1.8rem;
             font-size: 0.9rem;
             font-weight: 400;
@@ -637,9 +634,15 @@
 			box-shadow: 0 10px 30px var(--verdecito-hover_trans);
         }
 
-        section {            
+        section {
             margin: 0 auto;
-			padding: .5rem;
+			padding: 1.3rem .6rem;
+			display: flex;
+			flex-direction: column;
+			gap: 1rem;
+			min-height: 85dvh;
+			justify-content: center;
+			scroll-margin-top: 5.5rem;
         }
 
         .section-header {
@@ -692,7 +695,6 @@
 			display:flex;
 			flex-direction:column;
 			background: var(--white_transp1);
-			padding: .8rem; 
 			max-width: 1500px;
 			border-radius: 3%;
 		 }
@@ -721,7 +723,7 @@
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--verdecito), var(--verdecito-hover));
+            background: linear-gradient(90deg, var(--verdecito), var(--accent));
             transform: scaleX(0);
             transform-origin: left;
             transition: transform 0.4s ease;
@@ -734,17 +736,6 @@
         .feature-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 40px var(--shadow-hover);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            transition: transform 0.4s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
         }
 
         .feature-card h3 {
@@ -945,7 +936,7 @@
 
         .products-gallery__btn {
             position: absolute;
-            top: 50%;
+            bottom: 3%;
             transform: translateY(-50%);
             z-index: 2;
             display: flex;
@@ -1071,7 +1062,7 @@
             flex:0 1 0;
             width: 60px;
             height: 60px;
-            background: linear-gradient(135deg, var(--verdecito), var(--verdecito-hover));
+            background: linear-gradient(135deg, var(--verdecito), var(--accent));
             color: var(--primary);
             border-radius: 50%;
             align-items: center;
@@ -1116,28 +1107,6 @@
             grid-template-columns: 1fr;
             gap: 1rem;
             align-items: center;
-        }
-
-        .sustainability-text {
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .sustainability-text h3 {
-            
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-        }
-
-        .sustainability-text p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;            
-            line-height: 1.8;
-        }
-
-        .sustainability-stats {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: .8rem;
         }
 
         .stat-card {
@@ -1252,22 +1221,6 @@
             height: 100%;
             border: none;
         }
-		
-		.icono-personalizado {
-            position: absolute;
-            /* Posiciona el ícono exactamente en el centro del mapa */
-            top: 50%;
-            left: 50%;
-            /* Ajusta el punto de anclaje (la base del pin) en el centro exacto */
-            transform: translate(-50%, -100%); 
-            
-            /* Tamaño de tu ícono (puedes variarlo según tu diseño) */
-            width: 40px;
-            height: auto;
-            
-            /* Evita que el ícono interfiera si el usuario hace clic o arrastra el mapa */
-            pointer-events: none; 
-        }
 
         /* Testimonials */
         .testimonials-slider {
@@ -1311,7 +1264,7 @@
 
         .testimonials-btn {
             position: absolute;
-            top: 50%;
+            bottom: 30%;
             transform: translateY(-50%);
             z-index: 2;
             display: flex;
@@ -1474,29 +1427,6 @@
 		body > footer > div.footer-content > div:nth-child(4) > ul > li:nth-child(6) > a{color:orange;}
 		body > footer > div.footer-content > div:nth-child(4) > ul > li:nth-child(7) > a{color:orange;}
 
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-link {
-            width: 45px;
-            height: 45px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--verdecito);
-            transform: translateY(-5px) rotate(360deg);
-        }
-
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 1rem;
@@ -1542,7 +1472,6 @@
                 margin: 1rem 0;
                 min-height: calc(100vh - 20px);
                 border-radius: 0 0 10px 10px;
-                padding-top: 0;
             }
 
             .hero-content h1 {
@@ -1639,29 +1568,7 @@
             transform: translateY(-5px) scale(1.1);
             box-shadow: 0 8px 30px rgba(212, 175, 55, 0.6);
         }
-		
-/* Gallery  */
 
-        
-
-        .gallery-title {
-            text-align: center;
-            font-size: 1.5rem;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 2rem;
-            text-transform: uppercase;
-            color: var(--text-primary);
-        }
-
-        @media (min-width: 768px) {
-            .gallery-title {
-                font-size: 2rem;
-                margin-bottom: 3rem;
-            }
-        }
-
-		
         @media (min-width: 1280px) {
 		.hero h1 {
                 font-size: 7rem;
@@ -1807,6 +1714,7 @@
 					Cada lente tiene su propia historia. Encuentra el que cuente la tuya.
 				</p>
 			</div>
+
 			<div class="products-gallery" id="productsGallery" role="region" aria-roledescription="carrusel" aria-label="Galería de productos">
 				<div class="products-gallery__top">
 					<button class="products-gallery__play" id="productsPlay" aria-label="Pausar autoplay" aria-pressed="false">
@@ -2005,11 +1913,19 @@
 	</aside>
     <!-- Contact Section -->
     <section id="contacto">
-		<h3 class="gallery-title">¿Querés ver mejor? Hablemos.</h3>
+        
+			
+            
         <div class="contact-container">
             <div class="contact-info">
-					<h2 class="section-badge">¿Buscás algo único?</h2> 
-					<h2 class="section-title">Encontrá tu próximo par favorito.</h2> 
+                <div class="section-header">
+                    <span class="section-badge">Contacto</span>
+                    <h2 class="section-title">¿Buscás algo único?</h2>
+                    <p class="section-description">
+                        Encontrá tu próximo par favorito.
+                    </p>
+                </div>
+
                 <div class="contact-item">
                     <div class="contact-icon">🕐</div>
                     <div class="contact-details">    
@@ -2075,31 +1991,6 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>Enlaces Rápidos</h3>
-                <ul>
-                    <li><a href="#nosotros">Nosotros</a></li>
-                    <li><a href="#productos">Productos</a></li>
-                    <li><a href="#proceso">Nuestro Proceso</a></li>
-                    <li><a href="#sustentabilidad">Sustentabilidad</a></li>
-                    <li><a href="#testimonios">Testimonios</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Marcas Disponibles</h3>
-                <ul>
-                    <li>Ray-Ban</li>
-                    <li>Oakley</li>
-                    <li>Prada</li>
-                    <li>Gucci</li>
-                    <li>Tom Ford</li>
-                    <li>Versace</li>
-                    <li>Dolce & Gabbana</li>
-                    <li>Carrera</li>
-                    <li>Y muchas más...</li>
-                </ul>
-            </div>
             <div class="footer-section footer_spanded">
                 <h3>Información Legal</h3>
                 <ul>
@@ -2127,208 +2018,208 @@
 
     <script>
 	const images = [
-		{	
-			id:0001,
+		{
+			id: 1,
             src: './imgs/lentes21.png',
             title: 'RALPH LAUREN',
 			subTitle:'Exclusividad Total',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado ✨',
+            description: 'Edición exclusiva con armazón original restaurado y cristal nuevo polarizado con filtro UV. Elegancia clásica en estado puro.',
 			precio: 4400,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0002,
+		{
+			id: 2,
             src: './imgs/lentes19.png',
             title: 'LACOSTE',
 			subTitle:'Vanguardia y Estilo',
-            description: 'Nuevo polarizado, con filtro 400UV para máxima protección ♻️',
+            description: 'Diseño vanguardista de marca, con cristales nuevos y filtro 400UV para protección total sin perder el estilo.',
 			precio: 4600,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0003,
+		{
+			id: 3,
             src: './imgs/lentes20.png',
-            title: 'GUESS',			
+            title: 'GUESS',
 			subTitle:'Lujo y Distinción',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado ☀️',
+            description: 'Lujo y distinción en cada detalle: armazón original con cristal nuevo polarizado. Listo para robar miradas.',
 			precio: 3500,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0004,
+		{
+			id: 4,
             src: './imgs/lentes13.png',
             title: 'Calvin Klein',
 			subTitle: 'Premium',
-            description: 'De sol, ♻️☀️ con filtro 400UV para máxima protección✨',
+            description: 'Modelo premium de sol con filtro 400UV. Líneas sobrias, liviano y atemporal.',
 			precio: 2600,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0005,
+		{
+			id: 5,
             src: './imgs/lente12.png',
             title: 'RALPH LAUREN',
 			subTitle:'Elegancia Italiana',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado ☀️',
+            description: 'Inspiración italiana: armazón original restaurado con cristal nuevo polarizado y acabados impecables.',
 			precio: 2600,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0005,
+		{
+			id: 6,
             src: './imgs/lente10.png',
             title: 'VERSACE',
 			subTitle:'Exclusividad Total',
-            description: 'Con filtro 400UV para máxima protección.🩵 ¡ÚNICO PAR!',
+            description: 'Pieza única de Versace con cristal nuevo polarizado y filtro 400UV. ¡Solo un par disponible!',
 			precio: 4400,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0006,
+		{
+			id: 7,
             src: './imgs/lentes15.png',
             title: 'RAYBAN',
 			subTitle:'Aviator Clásico',
-            description: 'Cristales nuevos polarizados 💚',
+            description: 'El icónico aviador con cristales nuevos polarizados. Un clásico que nunca pasa de moda.',
 			precio: 5200,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0007,
+		{
+			id: 8,
             src: './imgs/lentes17.png',
             title: 'MYTHO',
 			subTitle:'Deporivo All Terrain',
-            description: 'Armazón original con cambio de cristales, protección UV y polarizado',
+            description: 'Pensado para todo terreno: armazón original, cristales nuevos con protección UV y polarizado.',
 			precio: 3700,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0008,
+		{
+			id: 9,
             src: './imgs/lentes16.png',
             title: 'DIOR',
 			subTitle:'Exclusividad Total',
-            description: 'Cristales nuevos polarizados 💚',
+            description: 'Exclusividad de Dior: cristales nuevos polarizados y detalles de diseño que marcan la diferencia.',
 			precio: 4800,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0009,
+		{
+			id: 10,
             src: './imgs/lente11.png',
             title: 'Motor Oil',
 			subTitle:'Tu Mejor elección',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado ♻️',
+            description: 'Tu mejor elección en estilo urbano: armazón original restaurado y cristal nuevo polarizado.',
 			precio: 2300,
 			tarjeta:null,
 			category: 'all'
-        },{	
-			id:0010,
+        },{
+			id: 11,
             src: './imgs/lentes9.png',
             title: 'AIRE',
-            description: 'Con filtro 400UV para máxima protección ¡Uno solo disponible!',
+            description: 'Liviano y fresco como el aire: cristales nuevos con filtro 400UV. ¡Última unidad!',
 			precio: 1900,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0011,
+		{
+			id: 12,
             src: './imgs/lentes14.png',
             title: 'Paco Rabanne',
 			subTitle:'All Mind',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado, 🩵 ¡Uno solo disponible!',
+            description: 'Filosofía All Mind: armazón original y cristal nuevo polarizado. ¡Solo uno disponible!',
 			precio: 2300,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0012,
+		{
+			id: 13,
             src: './imgs/lentes1.png',
             title: 'Second Hand',
 			subTitle:'Super Selección',
-            description: 'Me re copan los emprendimientos familiares que tienen un trasfondo más allá del negocio. 💚',
+            description: 'Super selección de temporada: piezas únicas elegidas una por una. Tu estilo, tu historia.',
 			precio: '0X0',
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0013,
+		{
+			id: 14,
             src: './imgs/lentes8.png',
             title: 'Giorgio Armani',
 			subTitle:'Viva La Vida',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado ♻️',
+            description: 'Vive la vida con clase: armazón original restaurado y cristal nuevo polarizado.',
 			precio: 3600,
 			tarjeta:null,
 			category: 'all'
-        },{	
-			id:0014,
+        },{
+			id: 15,
             src: './imgs/lentes3.png',
             title: 'MYTHO',
-            description: 'Con filtro 400UV para máxima protección. ♻️☀️',
+            description: 'Deportivo y resistente con filtro 400UV y cristales nuevos. Máxima protección, máximo rendimiento.',
 			precio: 2600,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0015,
+		{
+			id: 16,
             src: './imgs/lentes7.png',
             title: 'RAYBAN',
 			subTitle:'Only You',
-            description: 'Diseño único con armazón original y cristal ORIGINAL, (RB grabado en la última foto)♻️',
+            description: 'Solo para vos: armazón original con cristal ORIGINAL Ray-Ban (RB grabado en la última foto).',
 			precio: 2900,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0016,
+		{
+			id: 17,
             src: './imgs/lente4.png',
             title: 'NOVA',
 			subTitle:'Elegancia y Estilo',
-            description: 'Diseño único con armazón original y cristal nuevo polarizado',
+            description: 'Elegancia y estilo en equilibrio: armazón original y cristal nuevo polarizado.',
 			precio: 2200,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0017,
+		{
+			id: 18,
             src: './imgs/lentes6.png',
             title: 'CARRERA',
 			subTitle:'Máxima Fortaleza',
-            description: 'Filtro 400UV para máxima protección. ♻️☀️¡Solo uno en stock!',
+            description: 'Construido para durar: cristales nuevos con filtro 400UV. ¡Solo uno en stock!',
 			precio: 2800,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0018,
+		{
+			id: 19,
             src: './imgs/lente2.png',
             title: 'MORMAII',
 			subTitle:'Deporte y Yo',
-            description: 'Diseño único con armazón original y cristal nuevo polarizad☀️',
+            description: 'Tu compañero deportivo: armazón ligero y cristal nuevo polarizado con protección UV.',
 			precio: 2900,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0019,
+		{
+			id: 20,
             src: './imgs/lentes18.png',
             title: 'Ralph Lauren',
 			subTitle:'Mismo Estilo',
-            description: '☀️ ¡Uno solo disponible!',
+            description: 'Sofisticación Ralph Lauren con cristales nuevos polarizados. ¡Solo una unidad disponible!',
 			precio: 3500,
 			tarjeta:null,
 			category: 'all'
         },
-		{	
-			id:0020,
+		{
+			id: 21,
             src: './imgs/lente5.png',
             title: 'RAYBAN',
 			subTitle:'Nada Más Alto',
-            description: 'Diseño único con armazón original y cristal ORIGINAL, (RB grabado en la última foto)♻️',
+            description: 'Nada más alto que esto: armazón y cristales ORIGINALES Ray-Ban (RB grabado en la última foto).',
 			precio: 3600,
 			tarjeta:null,
 			category: 'all'
@@ -2445,7 +2336,7 @@
         }, observerOptions);
 		
 		// Observe all elements
-        document.querySelectorAll('.feature, .gallery_item, .about__content, .about__image-placeholder, .hero__image-placeholder, #nosotros').forEach(el => {
+        document.querySelectorAll('#nosotros').forEach(el => {
             el.style.opacity = '0';
             el.style.transform = 'translateY(130px)';
             el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -2523,7 +2414,7 @@
         window.addEventListener('scroll', () => {
             const currentScroll = window.scrollY;
 
-            if (currentScroll > 1200) {
+            if (currentScroll > 200) {
                 header.classList.add('scrolled');
                 header.style.backgroundColor = "var(--white_transp2)";
             } else {
@@ -2533,7 +2424,7 @@
 
             lastScroll = currentScroll;
 
-            if (currentScroll > 500) {
+            if (currentScroll > 300) {
                 scrollTopBtn.classList.add('visible');
             } else {
                 scrollTopBtn.classList.remove('visible');
@@ -2590,33 +2481,17 @@
         });
 
 
-        // Form validation (if you add a contact form later)
-        const validateEmail = (email) => {
-            return String(email)
-                .toLowerCase()
-                .match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/);
-        };
-
-        // Add loading state to buttons
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (this.classList.contains('loading')) {
-                    e.preventDefault();
-                }
-            });
-        });
-
         // Console welcome message
         console.log('%c¡Bienvenido a Vitra! 👓', 'font-size: 20px; color:yellow; font-weight: bold;');
         console.log('%cEmprendedoras con + estilo en un solo lugar', 'color:yellow; font-size: 14px;');
 
         // Performance monitoring
         window.addEventListener('load', () => {
-            const loadTime = window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart;
+            const loadTime = Math.round(performance.now());
             console.log(`Página cargada en ${loadTime}ms`);
 			const parrafo_info_load = document.getElementById('parrafo_info_load');
 			parrafo_info_load.style.fontStyle = "italic"; 
-			parrafo_info_load.style.fontFamily = 'Comfortaa';
+			parrafo_info_load.style.fontFamily = 'Playfair Display';
 			parrafo_info_load.style.fontSize = '.8em';
 			parrafo_info_load.style.color = 'var(--accent)';
 			parrafo_info_load.textContent=`(Página cargada en ${loadTime}ms)`;
@@ -2649,67 +2524,6 @@
         `;
         document.head.appendChild(style);
 
-        // Lazy loading images optimization
-	document.addEventListener('DOMContentLoaded', () => {
-	
-		// Opciones del IntersectionObserver
-	  const observerOptions = {
-		threshold: 0.1, // Se activa cuando el 10% de la imagen es visible
-		rootMargin: '0px 0px -100px 0px' // Carga un poco antes de que entre totalmente en pantalla
-	  };
-	  
-		// Si el navegador soporta IntersectionObserver
-        if ('IntersectionObserver' in window) {
-            const imageObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-						
-                        // Si devuelve el nombre en mayúsculas ('DIV', 'IMG', 'SECTION', etc).
-					if (img.tagName === 'IMG' && img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            observer.unobserve(img);
-                        }
-                    }
-                });
-            });
-				// Observar todas las imágenes con atributo data-src
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                imageObserver.observe(img);
-            });
-        }else {
-			// 🚨 Fallback: si no hay soporte, cargar todas las imágenes de inmediato
-			document.querySelectorAll('img[data-src]').forEach(img => {
-			  img.src = img.dataset.src;
-			  img.removeAttribute('data-src');
-			});
-		  }
-	});
-
-        // Track user interactions
-		
-		let contadorVisitas = 0;
-        const trackEvent = (category, action, label) => {
-				contadorVisitas++;
-            console.log(`Analytics: ${category} - ${action} - ${label} - Visitas: ${contadorVisitas}`);
-        };
-
-        // Track button clicks
-        document.querySelectorAll('.btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                trackEvent('Button', 'Click', btn.textContent.trim());
-            });
-        });
-
-        // Track navigation clicks
-        document.querySelectorAll('.nav-menu a').forEach(link => {
-            link.addEventListener('click', () => {
-                trackEvent('Navigation', 'Click', link.textContent.trim());
-            });
-        });
-
-
         // Check if user prefers reduced motion
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         
@@ -2720,23 +2534,6 @@
                 el.style.transition = 'none';
             });
         }
-
-        // Add copy email functionality
-        const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
-        emailLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const email = link.textContent.trim();
-                navigator.clipboard.writeText(email).then(() => {
-                    alert(`Email copiado: ${email}`);
-                }).catch(() => {
-                    window.location.href = link.href;
-                });
-            });
-        });
-
-	
-		
 
         // Products Gallery Slider
         const productsGallery = document.getElementById('productsGallery');
@@ -2980,81 +2777,6 @@
             }
         });
 
-        // Initialize tooltips (if you add data-tooltip attributes)
-        document.querySelectorAll('[data-tooltip]').forEach(el => {
-            el.addEventListener('mouseenter', (e) => {
-                const tooltip = document.createElement('div');
-                tooltip.className = 'tooltip';
-                tooltip.textContent = el.dataset.tooltip;
-                tooltip.style.position = 'absolute';
-                tooltip.style.background = 'var(--primary)';
-                tooltip.style.color = 'white';
-                tooltip.style.padding = '0.5rem 1rem';
-                tooltip.style.borderRadius = '8px';
-                tooltip.style.fontSize = '0.9rem';
-                tooltip.style.zIndex = '10000';
-                tooltip.style.pointerEvents = 'none';
-                
-                document.body.appendChild(tooltip);
-                
-                const rect = el.getBoundingClientRect();
-                tooltip.style.top = `${rect.top - tooltip.offsetHeight - 10}px`;
-                tooltip.style.left = `${rect.left + (rect.width - tooltip.offsetWidth) / 2}px`;
-                
-                el._tooltip = tooltip;
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                if (el._tooltip) {
-                    el._tooltip.remove();
-                    delete el._tooltip;
-                }
-            });
-        });
-
-        // Add shake animation on invalid form submission (for future forms)
-        const addShakeAnimation = (element) => {
-            element.style.animation = 'shake 0.5s';
-            setTimeout(() => {
-                element.style.animation = '';
-            }, 500);
-        };
-
-        const shakeStyle = document.createElement('style');
-        shakeStyle.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
-                20%, 40%, 60%, 80% { transform: translateX(10px); }
-            }
-        `;
-        document.head.appendChild(shakeStyle);
-
-        // Prevent default form submission and add validation
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                let isValid = true;
-                const inputs = form.querySelectorAll('input[required], textarea[required]');
-                
-                inputs.forEach(input => {
-                    if (!input.value.trim()) {
-                        isValid = false;
-                        addShakeAnimation(input);
-                        input.style.borderColor = '#ff4444';
-                    } else {
-                        input.style.borderColor = '';
-                    }
-                });
-                
-                if (isValid) {
-                    alert('¡Gracias por tu mensaje! Nos pondremos en contacto contigo pronto.');
-                    form.reset();
-                }
-            });
-        });
-
         // Add print styles dynamically
         const printStyles = document.createElement('style');
         printStyles.textContent = `
@@ -3068,13 +2790,6 @@
 
         // Console easter egg
         setTimeout(() => {
-		
-			const anchoBody = document.body.offsetWidth;
-			const anchoWindow = window.pageYOffset;
-			
-				console.log("anchoWindow"+anchoWindow);
-			console.log(`ancho body ${anchoBody}`);
-			
             console.log('%c💼 ¿Buscas un sitio para tus ideas?', 'color:orange;font-size: 16px; font-weight: bold;');
             console.log(' %cEnvía tu mail a: www.kikiriyadevops@gmail.com', ' color:orange; font-size: 14px;');
             console.log('%c📞: 094872605', 'color:orange;font-size: 14px;');
