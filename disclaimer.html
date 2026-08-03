@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disclaimer</title>
+
+    <link rel="shortcut icon" href="./logo_icons/VITRA 64.png" type="image/x-icon">
+
+    <style type="text/css">
+        :root {
+            --mYBoxShadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.6);
+            --textShadowRed: 0 0 10px #f638a1, 0 0 20px #ff0099, 0 0 30px #d900ff;
+            --textShadowBlue: 0 0 10px #4238f6, 0 0 20px #0040ff, 0 0 30px #00aeff;
+
+            --blueDark: rgb(0, 13, 255);
+            --blueClear: rgb(0, 76, 255);
+            --blueLight: skyblue;
+        }
+
+        body,
+        html {
+            /* margin: 0;
+            padding: 0; */
+            /* height: 100%; */
+            height: 100vh;
+        }
+
+
+        body {
+            /* min-height: 100%; */
+            min-height: 100vh;
+            width: 100%;
+            margin: 0 auto;
+            padding: 0;
+            background: whitesmoke;
+            /* font-family: 'Poppins', sans-serif; */
+            overflow-x: hidden;
+            line-height: normal;
+            display: block;
+        }
+
+        body::before,
+        body::after {
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            /* font-size: 100%; */
+        }
+
+        /* Elimina scroll vertical */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* MI CLASE FAVORITA */
+        .patch_mi_container {
+            display: flex;
+            justify-content: space-around;
+            align-content: center;
+            /* background-color: grey; */
+            color: crimson;
+            width: 100%;
+        }
+
+        img {
+            overflow-clip-margin: content-box;
+            overflow: clip;
+        }
+
+        a {
+            text-decoration: none;
+            list-style-type: none;
+        }
+
+        .container {
+            height: 100vh;
+            min-height: 100%;
+            min-width: 300px;
+            /* box-sizing: content-box; */
+            box-sizing: border-box;
+            margin: 10px auto;
+            padding: 1em;
+
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            /* background-color: whitesmoke; */
+            /* box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.6); */
+
+            /* overflow: hidden; */
+            font-size: 1em;
+
+        }
+
+        header {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            
+        }
+
+        header h1,
+        header h3,
+        header p {
+            color: rgb(2, 2, 27);
+            font-weight: 600;
+            margin: 5px;
+            font-family: serif;
+            font-size: 1em;
+        }
+
+        header:nth-child(1)>h1 {
+            text-align: center;
+            color: var(--blueClear);
+            text-transform: uppercase;
+            font-size: 1.5em;
+        }
+
+        header:nth-child(1)>h1::first-letter {
+            color: rgba(70, 243, 70, 0.924);
+            text-shadow: var(--textShadowBlue)
+        }
+
+        main {
+            flex: 3;
+            display: flex;
+            gap: 2rem;
+        }
+
+       
+
+        .title {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            width: 100%;
+            padding: 0 25px;
+
+            & p {
+                margin: 0 auto 0 auto;
+                position: relative;
+                z-index: 2;
+            }
+        }
+
+
+        .content_details {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+            height: 100%;
+            padding: .5rem;
+            top: .5rem;
+            align-items: center;
+            /* background-color: wheat; */
+            /* z-index: 12; */
+            overflow: hidden;
+            font-size: smaller;
+        }
+
+        .details {
+            float: right;
+            margin: 0 0 0 0;
+            width: 370px;
+            height: auto;
+            background: blueviolet;
+            padding: 40px 50px;
+            position: relative;
+            z-index: 1;
+
+            & h1,
+            h2 {
+                text-align: center;
+                color: #0be40f;
+                font-size: 30px;
+                font-weight: 300;
+                text-transform: uppercase;
+                margin: 0 0 10px 0;
+            }
+
+            & p {
+                color: yellowgreen;
+            }
+        }
+
+        footer {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            /* justify-content: space-around; */
+            width: 100%;
+            padding: 10px;
+            margin-top: 1rem;
+            row-gap: .5rem;
+            box-sizing: content-box;
+        }
+
+        input[type="date" i] {
+            font-family: monospace;
+            padding-inline-start: 1px;
+            cursor: default;
+            padding: 0px;
+        }
+
+        .btn-back {
+            display: flex;
+            justify-content: center;
+            width: 80px;
+            min-width: 80px;
+            background-color: rgba(70, 243, 70, 0.419);
+            border-radius: 10px;
+            width: 100px;
+            border: 1px solid rgba(51, 69, 51, 0.419);
+            box-shadow: rgba(0, 0, 0, 0.17) 0px -5px 5px 0px inset, rgba(0, 0, 0, 0.15) 0px -7px 4px 0px inset, rgba(0, 0, 0, 0.1) 0px -6px 3px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 2px 2px, rgba(0, 0, 0, 0.09) 0px 3px 4px, rgba(0, 0, 0, 0.09) 0px 4px 8px, rgba(0, 0, 0, 0.09) 0px 2px 2px;
+			 content: '';
+			 position:relative;
+            transition: opacity 2s, filter 2s, border-bottom 1s, transform 2s;
+            cursor: grabbing;
+            padding: 5px 0;
+        }
+
+        .btn-back:hover {
+            opacity: .8;
+            filter: sepia(1);
+			transform: scale(1.1);
+			transform: translateY(-2px);
+        }
+		
+		.btn-llamada::before {
+		 content: 'Llamar al Técnico';
+		 position: absolute;
+		   top: -35px; /* Lo coloca por encima del botón */
+		  left: 50%;
+		  transform: translateX(-50%) translateY(10px);
+		  bottom: calc(100% + 10px);
+		  background: grey;
+		  color: yellow;
+		  font-size: clamp(0.7rem, 2vw, 0.85rem);
+		  font-weight: 700;
+		  white-space: nowrap;
+		  padding: 0.45rem 0.9rem;
+		  border-radius: 10%;
+		  box-shadow:  0 4px 12px rgba(0, 0, 0, 0.4);
+		}
+		
+		.btn-llamada:hover::before {
+		  opacity: 1;
+		  transform: translateX(-50%) translateY(0); /* Se desliza suavemente hacia su posición */
+		}
+
+
+        /* -----------------   MEDIA QUERIS ----------------------------------- */
+        @media (360px < width < 1200px) {
+            .container {
+                justify-content: flex-start;
+                font-size: 1.2em;
+            }
+        }
+
+        @media (440px < width < 1200px) {
+            .btn-back {
+                width: 180px;
+            }
+        }
+
+        @media screen and (min-width:1200px) {
+
+           
+            .container {
+                justify-content: flex-start;
+                font-size: 2em;
+            }
+
+            .btn-back {
+                width: 250px;
+            }
+        }
+
+        /* @media screen and (max-width:520px)and (orientation: landscape) {*/
+
+        /* @media (max-height>300px){*/
+
+        /* @media (min-height:500px) and (max-height:600px){ */
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <header id="header">
+            <h1>Disclaimer</h1>
+            <h3> Aviso legal o Descargo de responsabilidad que establece los derechos del usuario y la responsabilidad
+                del autor.
+            </h3>
+        </header>
+
+        <main id="main">
+            <div class="content_details">
+                <p>Una política de Descargo de responsabilidad es una declaración que limita su responsabilidad e
+                    informa a los visitantes de su sitio web sobre las limitaciones de sus contenidos, productos o
+                    servicios. En esencia, es una forma de protegerse legalmente y, al mismo tiempo, ser transparente
+                    con su público.</p>
+                <p>Aunque nos esforzamos por asegurar que la información de este sitio sea correcta, no garantizamos que
+                    sea completa o exacta; tampoco nos comprometemos a asegurar que el sitio web siga estando disponible
+                    o que el material del sitio web se mantenga actualizado.</p>
+                <p>La información proporcionada por VITRA en éste Sitio, tiene únicamente fines informativos
+                    generales. Toda la información contenida en dicho Sitio se facilita de buena fe.</p>
+                <p>Si tiene alguna pregunta sobre este Descargo de responsabilidad, póngase en contacto con nosotros.
+                </p>
+                <p>El Sitio puede contener enlaces a sitios web afiliados. Si hace clic en uno de estos enlaces y
+                    realiza una compra, es posible que recibamos una comisión sin coste adicional para usted.</p>
+                <p>VITRA se reserva el derecho a cambiar o modificar este Descargo de responsabilidad en cualquier
+                    momento para mejorar el servicio y usted acepta quedar vinculado por dichas modificaciones o
+                    revisiones.</p>
+                <p style="text-transform: uppercase;text-align: end; width: 100%;">Gracias</p>
+            </div>
+
+        </main>
+
+        <footer>
+            <div class="patch_mi_container">
+                <a href="index.html" class="btn-back"><span>🔙</span></a>
+                <a href="https://wa.me/59898769462?text=Quiero%20solicitar%20presupuesto%20Gracias" target="_blank" rel="noreferrer noopener"class="btn-back btn-llamada" aria-label="WhatsApp de VITRA"><span>📞</span></a>
+            </div>
+            <div>
+                <p id="pAdvertencia" style="color: rgb(209 176 12); text-align: right;"></p>
+            </div>
+        </footer>
+
+
+    </div>
+
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById('pAdvertencia').innerHTML = 'Actualizado: ' + new Date().toLocaleDateString();
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Vitra Panel</title>
+    <style>
+        [hidden] { display: none !important; }
+
+        :root {
+            --accent: #d4af37;
+            --accent-dark: #c19a2e;
+            --bg: #F2F0E1;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --muted: #6c757d;
+            --border: #e0e0e0;
+            --danger: #dc3545;
+            --danger-dark: #b02a37;
+            --ok: #048858;
+            --shadow: 0 4px 20px rgba(0, 0, 0, .08);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0d0d0d;
+                --card: #171717;
+                --text: #f2f0e1;
+                --muted: #aaa;
+                --border: #333;
+                --shadow: 0 4px 20px rgba(0, 0, 0, .5);
+            }
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.5;
+        }
+
+        a, button, input, textarea { font: inherit; color: inherit; }
+
+        button { cursor: pointer; }
+
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.25rem;
+            background: var(--card);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+        }
+
+        .brand img {
+            width: 42px;
+            height: 42px;
+            object-fit: contain;
+        }
+
+        .brand h1 {
+            font-size: 1.15rem;
+            letter-spacing: .06em;
+        }
+
+        .container {
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 1.25rem 1rem 3rem;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            padding: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .card h2 {
+            font-size: 1.1rem;
+            margin-bottom: .5rem;
+        }
+
+        .card h2::before {
+            content: "";
+            display: inline-block;
+            width: 6px;
+            height: 18px;
+            border-radius: 3px;
+            background: var(--accent);
+            margin-right: .55rem;
+            vertical-align: -2px;
+        }
+
+        .hint {
+            color: var(--muted);
+            font-size: .85rem;
+            margin-bottom: .75rem;
+        }
+
+        .field {
+            margin-bottom: .9rem;
+        }
+
+        .field label {
+            display: block;
+            font-weight: 600;
+            font-size: .9rem;
+            margin-bottom: .35rem;
+        }
+
+        .field small {
+            font-weight: 400;
+            color: var(--muted);
+        }
+
+        input[type="text"],
+        input[type="password"],
+        textarea {
+            width: 100%;
+            padding: .8rem .9rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg);
+            font-size: 1rem;
+        }
+
+        textarea { resize: vertical; }
+
+        .file-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            width: 100%;
+            padding: .95rem 1rem;
+            border: 2px dashed var(--accent);
+            border-radius: 12px;
+            color: var(--accent-dark);
+            font-weight: 600;
+            font-size: .95rem;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .file-label:active { background: rgba(212, 175, 55, .12); }
+
+        #previewWrap {
+            margin-top: .75rem;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+        }
+
+        #previewWrap img {
+            width: 72px;
+            height: 72px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        .link-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            text-decoration: underline;
+            font-size: .85rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: .5rem;
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #1a1a1a;
+        }
+
+        .btn-primary:active { background: var(--accent-dark); }
+
+        .btn:disabled { opacity: .6; cursor: wait; }
+
+        .error { color: var(--danger); font-size: .9rem; margin-top: .6rem; }
+        .ok { color: var(--ok); font-size: .9rem; margin-top: .6rem; }
+
+        .login-card {
+            max-width: 400px;
+            margin: 12vh auto 0;
+            text-align: center;
+        }
+
+        .login-card h2 { margin-bottom: .25rem; }
+        .login-card p { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+        .login-card form { text-align: left; }
+        .login-card .btn { margin-top: .5rem; }
+
+        .products-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: .6rem;
+        }
+
+        .product-item {
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: .6rem;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--bg);
+        }
+
+        .product-item img {
+            width: 52px;
+            height: 52px;
+            object-fit: cover;
+            border-radius: 8px;
+            flex-shrink: 0;
+            background: var(--card);
+        }
+
+        .p-info {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .p-info strong {
+            font-size: .95rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .p-info span {
+            color: var(--muted);
+            font-size: .8rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .btn-delete {
+            background: var(--danger);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: .65rem .9rem;
+            font-weight: 700;
+            font-size: .85rem;
+            flex-shrink: 0;
+        }
+
+        .btn-delete:active { background: var(--danger-dark); }
+
+        .loading, .empty { color: var(--muted); text-align: center; padding: 1rem; list-style: none; }
+
+        .logout {
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: .5rem .9rem;
+            color: var(--muted);
+            font-size: .85rem;
+        }
+
+        @media (min-width: 768px) {
+            .container { padding-top: 2rem; }
+            .card { padding: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="panel-header">
+        <div class="brand">
+            <img src="logo_icons/logo_vitra-removebg.png" alt="" aria-hidden="true">
+            <h1>Vitra Panel</h1>
+        </div>
+        <button type="button" class="logout" id="logoutBtn" hidden>Cerrar sesión</button>
+    </header>
+
+    <main class="container">
+        <!-- Pantalla de login -->
+        <section class="card login-card" id="loginView">
+            <h2>Iniciar sesión</h2>
+            <p>Solo para administradores del sitio.</p>
+            <form id="loginForm" novalidate>
+                <div class="field">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password" required>
+                </div>
+                <button type="submit" class="btn btn-primary" id="loginBtn">Entrar</button>
+                <p class="error" id="loginError" role="alert" hidden></p>
+            </form>
+        </section>
+
+        <!-- Panel -->
+        <div id="panelView" hidden>
+            <!-- Sección A: Agregar nuevo lente -->
+            <section class="card">
+                <h2>Agregar un nuevo lente</h2>
+                <form id="productForm" novalidate>
+                    <div class="field">
+                        <label for="pTitle">Nombre / Marca *</label>
+                        <input type="text" id="pTitle" maxlength="60" placeholder="Ej: Ray-Ban" required>
+                    </div>
+                    <div class="field">
+                        <label for="pSubTitle">Subtítulo <small>(opcional)</small></label>
+                        <input type="text" id="pSubTitle" maxlength="60" placeholder="Ej: Aviator Clásico">
+                    </div>
+                    <div class="field">
+                        <label for="pDescription">Descripción</label>
+                        <textarea id="pDescription" rows="3" maxlength="300" placeholder="Detalles del lente..."></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="pPrice">Precio</label>
+                        <input type="text" id="pPrice" inputmode="decimal" placeholder="Ej: 4400">
+                    </div>
+                    <div class="field">
+                        <label class="file-label" for="pImage">
+                            <span id="fileText">Seleccionar foto del celular o PC</span>
+                        </label>
+                        <input type="file" id="pImage" accept="image/*" hidden>
+                        <div id="previewWrap" hidden>
+                            <img id="pImagePreview" alt="Vista previa de la foto seleccionada">
+                            <button type="button" class="link-btn" id="removeImage">Quitar foto</button>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" id="publishBtn">Publicar en la web</button>
+                    <p class="ok" id="formMsgOk" role="status" hidden></p>
+                    <p class="error" id="formMsgErr" role="alert" hidden></p>
+                </form>
+            </section>
+
+            <!-- Sección B: Productos actuales -->
+            <section class="card">
+                <h2>Productos actuales</h2>
+                <p class="hint">Estos son los lentes publicados. Si se vendió el último par, tocá [Eliminar] y desaparece de la web.</p>
+                <ul class="products-list" id="productsList"></ul>
+                <p class="error" id="listMsgErr" role="alert" hidden></p>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        const APP_SCRIPT_URL = 'PEGAR_AQUI_LA_URL_DEL_WEB_APP';
+
+        const $ = (sel) => document.querySelector(sel);
+
+        const loginView = $('#loginView');
+        const panelView = $('#panelView');
+        const logoutBtn = $('#logoutBtn');
+        const loginForm = $('#loginForm');
+        const passwordInput = $('#password');
+        const loginBtn = $('#loginBtn');
+        const loginError = $('#loginError');
+        const productForm = $('#productForm');
+        const publishBtn = $('#publishBtn');
+        const formMsgOk = $('#formMsgOk');
+        const formMsgErr = $('#formMsgErr');
+        const fileInput = $('#pImage');
+        const fileText = $('#fileText');
+        const previewWrap = $('#previewWrap');
+        const previewImg = $('#pImagePreview');
+        const removeImageBtn = $('#removeImage');
+        const productsList = $('#productsList');
+        const listMsgErr = $('#listMsgErr');
+
+        const state = {
+            loggedIn: false,
+            password: sessionStorage.getItem('vitra_admin_pw') || ''
+        };
+
+        const setStatus = (elOk, elErr, msg, type) => {
+            if (elOk) elOk.hidden = true;
+            if (elErr) elErr.hidden = true;
+            if (!msg) return;
+            if (type === 'ok') {
+                elOk.textContent = msg;
+                elOk.hidden = false;
+            } else {
+                elErr.textContent = msg;
+                elErr.hidden = false;
+            }
+        };
+
+        async function api(action, payload) {
+            if (!APP_SCRIPT_URL || !APP_SCRIPT_URL.startsWith('https://script.google.com')) {
+                throw new Error('Falta pegar la URL del Web App en APP_SCRIPT_URL.');
+            }
+            const url = new URL(APP_SCRIPT_URL);
+            url.searchParams.set('action', action);
+            const body = Object.assign({ action }, payload, { password: state.password });
+            const res = await fetch(url.toString(), { method: 'POST', body: JSON.stringify(body) });
+            const data = await res.json().catch(() => null);
+            if (!data || data.error) {
+                throw new Error((data && data.error) || 'Error de red. Probá de nuevo.');
+            }
+            return data;
+        }
+
+        function showView() {
+            loginView.hidden = state.loggedIn;
+            panelView.hidden = !state.loggedIn;
+            logoutBtn.hidden = !state.loggedIn;
+        }
+
+        // ------------------- Login -------------------
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const pass = passwordInput.value.trim();
+            if (!pass) return;
+            setStatus(null, loginError, '', '');
+            loginBtn.disabled = true;
+            state.password = pass;
+            try {
+                await api('check');
+                state.loggedIn = true;
+                sessionStorage.setItem('vitra_admin_pw', pass);
+                passwordInput.value = '';
+                showView();
+                loadProducts();
+            } catch (err) {
+                state.password = '';
+                sessionStorage.removeItem('vitra_admin_pw');
+                setStatus(null, loginError, err.message, 'error');
+            } finally {
+                loginBtn.disabled = false;
+            }
+        });
+
+        logoutBtn.addEventListener('click', () => {
+            state.loggedIn = false;
+            state.password = '';
+            sessionStorage.removeItem('vitra_admin_pw');
+            showView();
+        });
+
+        // ------------------- Foto -------------------
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (!file) return;
+            previewImg.src = URL.createObjectURL(file);
+            previewWrap.hidden = false;
+            fileText.textContent = file.name;
+        });
+
+        removeImageBtn.addEventListener('click', () => {
+            fileInput.value = '';
+            previewWrap.hidden = true;
+            fileText.textContent = 'Seleccionar foto del celular o PC';
+        });
+
+        function compressImage(file, maxDim, quality) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = (ev) => {
+                    const img = new Image();
+                    img.onload = () => {
+                        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+                        const canvas = document.createElement('canvas');
+                        canvas.width = Math.round(img.width * scale);
+                        canvas.height = Math.round(img.height * scale);
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        const type = 'image/jpeg';
+                        resolve({ base64: canvas.toDataURL(type, quality).split(',')[1], type });
+                    };
+                    img.onerror = reject;
+                    img.src = ev.target.result;
+                };
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ------------------- Publicar -------------------
+        productForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            setStatus(formMsgOk, formMsgErr, '', '');
+
+            const title = $('#pTitle').value.trim();
+            if (!title) {
+                setStatus(formMsgOk, formMsgErr, 'El nombre del lente es obligatorio.', 'error');
+                $('#pTitle').focus();
+                return;
+            }
+
+            let imageBase64 = '';
+            let imageType = '';
+            const file = fileInput.files[0];
+            if (file) {
+                try {
+                    const compressed = await compressImage(file, 1200, 0.8);
+                    imageBase64 = compressed.base64;
+                    imageType = compressed.type;
+                } catch (err) {
+                    setStatus(formMsgOk, formMsgErr, 'No se pudo procesar la foto. Elegí otra.', 'error');
+                    return;
+                }
+            }
+
+            const rawPrice = $('#pPrice').value.trim();
+            const num = Number(rawPrice.replace(',', '.'));
+            const precio = rawPrice !== '' && !isNaN(num) ? num : rawPrice;
+
+            publishBtn.disabled = true;
+            publishBtn.textContent = 'Publicando...';
+            try {
+                await api('add', {
+                    title,
+                    subTitle: $('#pSubTitle').value.trim(),
+                    description: $('#pDescription').value.trim(),
+                    precio,
+                    imageBase64,
+                    imageType
+                });
+                productForm.reset();
+                previewWrap.hidden = true;
+                fileText.textContent = 'Seleccionar foto del celular o PC';
+                setStatus(formMsgOk, formMsgErr, '¡Publicado! Ya aparece en la web.', 'ok');
+                loadProducts();
+            } catch (err) {
+                setStatus(formMsgOk, formMsgErr, err.message, 'error');
+            } finally {
+                publishBtn.disabled = false;
+                publishBtn.textContent = 'Publicar en la web';
+            }
+        });
+
+        // ------------------- Lista / Eliminar -------------------
+        async function loadProducts() {
+            productsList.innerHTML = '<li class="loading">Cargando productos...</li>';
+            listMsgErr.hidden = true;
+            try {
+                const res = await fetch(`${APP_SCRIPT_URL}?action=list&_=${Date.now()}`);
+                const data = await res.json();
+                if (!Array.isArray(data)) throw new Error('Respuesta inválida');
+                if (data.length === 0) {
+                    productsList.innerHTML = '<li class="empty">No hay productos publicados.</li>';
+                    return;
+                }
+                productsList.innerHTML = '';
+                data.forEach((p) => {
+                    const li = document.createElement('li');
+                    li.className = 'product-item';
+
+                    const img = document.createElement('img');
+                    img.src = p.src || '';
+                    img.alt = p.title;
+                    img.loading = 'lazy';
+
+                    const info = document.createElement('div');
+                    info.className = 'p-info';
+                    const name = document.createElement('strong');
+                    name.textContent = p.title;
+                    const sub = document.createElement('span');
+                    sub.textContent = p.subTitle || '';
+                    info.append(name, sub);
+
+                    const del = document.createElement('button');
+                    del.type = 'button';
+                    del.className = 'btn-delete';
+                    del.textContent = 'Eliminar';
+                    del.setAttribute('aria-label', `Eliminar ${p.title}`);
+                    del.addEventListener('click', () => deleteProduct(p.id, p.title));
+
+                    li.append(img, info, del);
+                    productsList.appendChild(li);
+                });
+            } catch (err) {
+                productsList.innerHTML = '';
+                setStatus(null, listMsgErr, 'No se pudo cargar la lista: ' + err.message, 'error');
+            }
+        }
+
+        async function deleteProduct(id, title) {
+            if (!confirm(`¿Seguro que querés eliminar "${title}"? Desaparecerá de la web al instante.`)) return;
+            setStatus(null, listMsgErr, '', '');
+            try {
+                await api('delete', { id });
+                loadProducts();
+            } catch (err) {
+                setStatus(null, listMsgErr, err.message, 'error');
+            }
+        }
+
+        // ------------------- Init -------------------
+        (async function init() {
+            showView();
+            if (!state.password) return;
+            try {
+                await api('check');
+                state.loggedIn = true;
+                showView();
+                loadProducts();
+            } catch (err) {
+                state.loggedIn = false;
+                state.password = '';
+                sessionStorage.removeItem('vitra_admin_pw');
+                showView();
+            }
+        })();
+    </script>
+</body>
+</html>
