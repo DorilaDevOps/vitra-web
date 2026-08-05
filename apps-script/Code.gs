@@ -153,27 +153,27 @@ function setPassword() {
 // ---------------------------------------------------------------------
 function seedProducts() {
   var products = [
-    ['0001', 'RALPH LAUREN', 'Exclusividad Total', 'Diseño único con armazón original y cristal nuevo polarizado ✨', 4400, null, 'all', './imgs/lentes21.png'],
-    ['0002', 'LACOSTE', 'Vanguardia y Estilo', 'Nuevo polarizado, con filtro 400UV para máxima protección ♻️', 4600, null, 'all', './imgs/lentes19.png'],
-    ['0003', 'GUESS', 'Lujo y Distinción', 'Diseño único con armazón original y cristal nuevo polarizado ☀️', 3500, null, 'all', './imgs/lentes20.png'],
-    ['0004', 'Calvin Klein', 'Premium', 'De sol, ♻️☀️ con filtro 400UV para máxima protección✨', 2600, null, 'all', './imgs/lentes13.png'],
-    ['0005', 'RALPH LAUREN', 'Elegancia Italiana', 'Diseño único con armazón original y cristal nuevo polarizado ☀️', 2600, null, 'all', './imgs/lente12.png'],
-    ['0006', 'VERSACE', 'Exclusividad Total', 'Con filtro 400UV para máxima protección.🩵 ¡ÚNICO PAR!', 4400, null, 'all', './imgs/lente10.png'],
-    ['0007', 'RAYBAN', 'Aviator Clásico', 'Cristales nuevos polarizados 💚', 5200, null, 'all', './imgs/lentes15.png'],
-    ['0008', 'MYTHO', 'Deporivo All Terrain', 'Armazón original con cambio de cristales, protección UV y polarizado', 3700, null, 'all', './imgs/lentes17.png'],
-    ['0009', 'DIOR', 'Exclusividad Total', 'Cristales nuevos polarizados 💚', 4800, null, 'all', './imgs/lentes16.png'],
-    ['0010', 'Motor Oil', 'Tu Mejor elección', 'Diseño único con armazón original y cristal nuevo polarizado ♻️', 2300, null, 'all', './imgs/lente11.png'],
-    ['0011', 'AIRE', '', 'Con filtro 400UV para máxima protección ¡Uno solo disponible!', 1900, null, 'all', './imgs/lentes9.png'],
-    ['0012', 'Paco Rabanne', 'All Mind', 'Diseño único con armazón original y cristal nuevo polarizado, 🩵 ¡Uno solo disponible!', 2300, null, 'all', './imgs/lentes14.png'],
-    ['0013', 'Second Hand', 'Super Selección', 'Me re copan los emprendimientos familiares que tienen un trasfondo más allá del negocio. 💚', '0X0', null, 'all', './imgs/lentes1.png'],
-    ['0014', 'Giorgio Armani', 'Viva La Vida', 'Diseño único con armazón original y cristal nuevo polarizado ♻️', 3600, null, 'all', './imgs/lentes8.png'],
-    ['0015', 'MYTHO', '', 'Con filtro 400UV para máxima protección. ♻️☀️', 2600, null, 'all', './imgs/lentes3.png'],
-    ['0016', 'RAYBAN', 'Only You', 'Diseño único con armazón original y cristal ORIGINAL, (RB grabado en la última foto)♻️', 2900, null, 'all', './imgs/lentes7.png'],
-    ['0017', 'NOVA', 'Elegancia y Estilo', 'Diseño único con armazón original y cristal nuevo polarizado', 2200, null, 'all', './imgs/lente4.png'],
-    ['0018', 'CARRERA', 'Máxima Fortaleza', 'Filtro 400UV para máxima protección. ♻️☀️¡Solo uno en stock!', 2800, null, 'all', './imgs/lentes6.png'],
-    ['0019', 'MORMAII', 'Deporte y Yo', 'Diseño único con armazón original y cristal nuevo polarizad☀️', 2900, null, 'all', './imgs/lente2.png'],
-    ['0020', 'Ralph Lauren', 'Mismo Estilo', '☀️ ¡Uno solo disponible!', 3500, null, 'all', './imgs/lentes18.png'],
-    ['0021', 'RAYBAN', 'Nada Más Alto', 'Diseño único con armazón original y cristal ORIGINAL, (RB grabado en la última foto)♻️', 3600, null, 'all', './imgs/lente5.png']
+    ['0001', 'RALPH LAUREN', 'Exclusividad Total', 'Diseño único con armazón original y cristal nuevo polarizado ✨', 4400, null, 'clasico', './imgs/lentes21.png'],
+    ['0002', 'LACOSTE', 'Vanguardia y Estilo', 'Nuevo polarizado, con filtro 400UV para máxima protección ♻️', 4600, null, 'de sol', './imgs/lentes19.png'],
+    ['0003', 'GUESS', 'Lujo y Distinción', 'Diseño único con armazón original y cristal nuevo polarizado ☀️', 3500, null, 'clasico', './imgs/lentes20.png'],
+    ['0004', 'Calvin Klein', 'Premium', 'De sol, ♻️☀️ con filtro 400UV para máxima protección✨', 2600, null, 'de sol', './imgs/lentes13.png'],
+    ['0005', 'RALPH LAUREN', 'Elegancia Italiana', 'Diseño único con armazón original y cristal nuevo polarizado ☀️', 2600, null, 'clasico', './imgs/lente12.png'],
+    ['0006', 'VERSACE', 'Exclusividad Total', 'Con filtro 400UV para máxima protección.🩵 ¡ÚNICO PAR!', 4400, null, 'de sol', './imgs/lente10.png'],
+    ['0007', 'RAYBAN', 'Aviator Clásico', 'Cristales nuevos polarizados 💚', 5200, null, 'de sol', './imgs/lentes15.png'],
+    ['0008', 'MYTHO', 'Deporivo All Terrain', 'Armazón original con cambio de cristales, protección UV y polarizado', 3700, null, 'deportivo', './imgs/lentes17.png'],
+    ['0009', 'DIOR', 'Exclusividad Total', 'Cristales nuevos polarizados 💚', 4800, null, 'de sol', './imgs/lentes16.png'],
+    ['0010', 'Motor Oil', 'Tu Mejor elección', 'Diseño único con armazón original y cristal nuevo polarizado ♻️', 2300, null, 'clasico', './imgs/lente11.png'],
+    ['0011', 'AIRE', '', 'Con filtro 400UV para máxima protección ¡Uno solo disponible!', 1900, null, 'de sol', './imgs/lentes9.png'],
+    ['0012', 'Paco Rabanne', 'All Mind', 'Diseño único con armazón original y cristal nuevo polarizado, 🩵 ¡Uno solo disponible!', 2300, null, 'clasico', './imgs/lentes14.png'],
+    ['0013', 'Second Hand', 'Super Selección', 'Me re copan los emprendimientos familiares que tienen un trasfondo más allá del negocio. 💚', '0X0', null, 'clasico', './imgs/lentes1.png'],
+    ['0014', 'Giorgio Armani', 'Viva La Vida', 'Diseño único con armazón original y cristal nuevo polarizado ♻️', 3600, null, 'clasico', './imgs/lentes8.png'],
+    ['0015', 'MYTHO', '', 'Con filtro 400UV para máxima protección. ♻️☀️', 2600, null, 'deportivo', './imgs/lentes3.png'],
+    ['0016', 'RAYBAN', 'Only You', 'Diseño único con armazón original y cristal ORIGINAL, (RB grabado en la última foto)♻️', 2900, null, 'clasico', './imgs/lentes7.png'],
+    ['0017', 'NOVA', 'Elegancia y Estilo', 'Diseño único con armazón original y cristal nuevo polarizado', 2200, null, 'clasico', './imgs/lente4.png'],
+    ['0018', 'CARRERA', 'Máxima Fortaleza', 'Filtro 400UV para máxima protección. ♻️☀️¡Solo uno en stock!', 2800, null, 'deportivo', './imgs/lentes6.png'],
+    ['0019', 'MORMAII', 'Deporte y Yo', 'Diseño único con armazón original y cristal nuevo polarizad☀️', 2900, null, 'deportivo', './imgs/lente2.png'],
+    ['0020', 'Ralph Lauren', 'Mismo Estilo', '☀️ ¡Uno solo disponible!', 3500, null, 'clasico', './imgs/lentes18.png'],
+    ['0021', 'RAYBAN', 'Nada Más Alto', 'Diseño único con armazón original y cristal ORIGINAL, (RB grabado en la última foto)♻️', 3600, null, 'de sol', './imgs/lente5.png']
   ];
 
   var sheet = getSheet();
@@ -264,6 +264,12 @@ function addProduct(body) {
 
   if (!title) throw new Error('El nombre del lente es obligatorio.');
 
+  var category = String(body.category || '').trim().toLowerCase();
+  var validCategories = ['de sol', 'deportivo', 'clasico'];
+  if (validCategories.indexOf(category) === -1) {
+    category = 'clasico';
+  }
+
   var src = '';
   var imageBase64 = String(body.imageBase64 || '');
   if (imageBase64) {
@@ -287,7 +293,7 @@ function addProduct(body) {
     description: description,
     precio: precio,
     tarjeta: body.tarjeta || null,
-    category: 'all',
+    category: category,
     src: src
   };
 

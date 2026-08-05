@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Panel de administración de Vitra - Lentes second hand en Montevideo. Gestión del catálogo y stock de lentes originales restaurados.">
     <title>Vitra Panel</title>
     <style>
         [hidden] { display: none !important; }
@@ -133,7 +134,8 @@
 
         input[type="text"],
         input[type="password"],
-        textarea {
+        textarea,
+        select {
             width: 100%;
             padding: .8rem .9rem;
             border: 1px solid var(--border);
@@ -350,6 +352,14 @@
                         <input type="text" id="pPrice" inputmode="decimal" placeholder="Ej: 4400">
                     </div>
                     <div class="field">
+                        <label for="pCategory">Tipo de lente</label>
+                        <select id="pCategory">
+                            <option value="de sol">De sol</option>
+                            <option value="deportivo">Deportivo</option>
+                            <option value="clasico" selected>Clásico</option>
+                        </select>
+                    </div>
+                    <div class="field">
                         <label class="file-label" for="pImage">
                             <span id="fileText">Seleccionar foto del celular o PC</span>
                         </label>
@@ -555,6 +565,7 @@
                     subTitle: $('#pSubTitle').value.trim(),
                     description: $('#pDescription').value.trim(),
                     precio,
+                    category: $('#pCategory').value,
                     imageBase64,
                     imageType
                 });
@@ -598,7 +609,7 @@
                     const name = document.createElement('strong');
                     name.textContent = p.title;
                     const sub = document.createElement('span');
-                    sub.textContent = p.subTitle || '';
+                    sub.textContent = [p.subTitle, p.category].filter(Boolean).join(' · ');
                     info.append(name, sub);
 
                     const del = document.createElement('button');
